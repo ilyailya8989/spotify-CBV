@@ -1,0 +1,22 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block content %}
+    <div class="item">
+        <img src="{{ music.image.url }}" alt="">
+        <h1>Название: {{ music.name }}</h1>
+        <h2>Жанры:{{ genres_str }}</h2>
+        <audio controls>
+            <source src="{{ music.file.url }}">
+        </audio>
+        <form action="" method="post">
+            {% csrf_token %}
+            <select name="playlist" id="select">
+                {% for playlist in playlists %}
+                    <option value="{{ playlist.id }}">{{ playlist.name }}</option>
+                {% endfor %}
+                <option disabled selected>Выберите playlist</option>
+            </select>
+            <button>Добавить</button>
+        </form>
+    </div>
+{% endblock %}

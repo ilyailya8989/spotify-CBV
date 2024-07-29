@@ -1,0 +1,18 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block title %}
+    Альбомы
+{% endblock %}
+
+{% block content %}
+    <div class="list">
+        {% for album in albums %}
+            <a href="{% url 'albums_detail' pk=album.id %}" class="item">
+                <img src="{{ album.image.url }}" alt="">
+                <p>{{ album.name }}</p>
+            </a>
+        {% empty %}
+            <p>Альбомы пока нет</p>
+        {% endfor %}
+    </div>
+{% endblock %}

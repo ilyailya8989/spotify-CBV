@@ -1,0 +1,13 @@
+{% extends 'music/layouts/base.html' %}
+{% block title %} Добавить музыку{% endblock %}
+
+{% block content %}
+    <h2>Загрузка музыки</h2>
+    <form
+            method="post"
+            enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button>Загрузить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'music/layouts/base.html' %}
+{% block title %}Удаление {% endblock %}
+
+{% block content %}
+    <h2>Вы действительно хотите удалить плейлист: {{ playlist.name }}?</h2>
+    <form action="" method="post">
+        {% csrf_token %}
+        <button>Подтвердить</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block title %} История {% endblock %}
+
+
+{% block content %}
+    <h2>История прослушивания</h2>
+    <div class="vertical">
+
+        {% for history in histories %}
+            <div class="vertical-item">
+                <p class="center">
+                    <audio controls>
+                        <source src="{{ history.music.file.url }}">
+                    </audio>
+                    {{ history.music.name }}
+                </p>
+                <p>{{ history.listened_at }}</p>
+            </div>
+        {% empty %}
+            <h1>Вы еще не прослушали песни</h1>
+        {% endfor %}
+    </div>
+    {% if is_paginated %}
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Назад</a>
+            {% endif %}
+             {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Вперед</a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+{% endblock %}

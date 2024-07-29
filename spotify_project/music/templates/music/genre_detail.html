@@ -1,0 +1,15 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block content %}
+    <h1>Жанр: {{ genre.name }}</h1>
+    <div class="list">
+        {% for music in musics %}
+            <a href="{% url 'music' pk=music.pk %}" class="item">
+                <img src="{{ music.image.url }}" alt="">
+                <p>{{ music.name }}</p>
+            </a>
+        {% empty %}
+            <p>Музыки пока нет</p>
+        {% endfor %}
+    </div>
+{% endblock %}

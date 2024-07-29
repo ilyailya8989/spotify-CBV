@@ -1,0 +1,25 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block title %}
+    Плейлисты
+{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <form class="form" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button>Добавить</button>
+        </form>
+    </div>
+    <div class="list">
+        {% for playlist in new_playlists %}
+            <a href="{% url 'playlist_detail' pk=playlist.id %}" class="item">
+                <img src="{{ playlist.image }}" alt="">
+                <p>{{ playlist.name }}</p>
+            </a>
+        {% empty %}
+            <p>Плейлистов пока нет</p>
+        {% endfor %}
+    </div>
+{% endblock %}

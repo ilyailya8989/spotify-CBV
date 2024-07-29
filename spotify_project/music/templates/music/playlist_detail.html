@@ -1,0 +1,31 @@
+{% extends 'music/layouts/base.html' %}
+
+{% block title %} Музыка {% endblock %}
+
+
+{% block content %}
+    <div>
+        <h2>Плейлист: {{ playlist.name }}</h2>
+        <button><a href="{% url 'playlist_remove' pk=playlist.id %}">Удалить плейлист {{ playlist.name }}</a></button>
+    </div>
+
+    <div class="vertical">
+        {% for music in playlist.musics.all %}
+            <div class="vertical-item">
+                <p class="center">
+                    <audio controls>
+                        <source src="{{ music.file.url }}">
+                    </audio>
+                    {{ music.name }}
+                </p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <button name="music_id" value="{{ music.id }}">Удалить</button>
+                </form>
+            </div>
+        {% empty %}
+            <h1>В вашем плейлисте нет песен</h1>
+        {% endfor %}
+    </div>
+
+{% endblock %}
